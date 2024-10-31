@@ -1,0 +1,5 @@
+SQLAlchemy
+requests
+fastapi[standard]
+youtube-transcript-api
+ollama
