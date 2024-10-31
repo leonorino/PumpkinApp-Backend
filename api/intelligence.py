@@ -2,7 +2,7 @@ import ollama
 
 # Описание JSON-схемы для ответа нейросети.
 FREEFORM_SCHEMA = '''{
-    "questions: [
+    "questions": [
         {
             "question": "string",
             "answer": "string"
