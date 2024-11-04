@@ -4,4 +4,4 @@
 ### Инструкции по запуску
 - Настройка Python: желательно создать чистое виртуальное окружение и установить в него зависимости: `pip install -r requirements.txt`
 - Настройка Ollama: во время работы с проектом должно быть открыто приложение [Ollama](https://ollama.com/download) и установлена модель `llama3.2`: `ollama pull llama3.2`.
-- Запуск: `fast dev app.py --reload` из корневой директории.
+- Запуск: `fastapi dev app.py --reload` из корневой директории.
