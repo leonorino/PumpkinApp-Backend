@@ -5,7 +5,10 @@ from pydantic import BaseModel, PositiveInt
 class QuestionTypes(str, Enum):
     """Перечисление возможных типов вопросов"""
     freeform = 'freeform'
-    choices = 'choices'
+    true_false = 'true_false'
+    gap = 'gap'
+    multiple_choice = 'multiple_choice'
+    oneword = 'oneword'
 
 
 class QuestionsRequest(BaseModel):
