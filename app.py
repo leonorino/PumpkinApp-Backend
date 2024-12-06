@@ -1,8 +1,12 @@
+import os
+
 import fastapi as fast
 
-from db_manager import db_init
 from api.routes import router
+from api.mock import mock_router
 
-db_init()
 app = fast.FastAPI()
-app.include_router(router)
+if os.environ.get('MOCK', None):
+    app.include_router(mock_router)
+else:
+    app.include_router(router)
