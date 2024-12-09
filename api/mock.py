@@ -1,9 +1,10 @@
 import os
+import time
 
 import fastapi as fast
 
 MOCK_DATA = {
-  "multiple_choice": [
+  "choice": [
     {
       "question": "Which type of processor will be faster for tasks with less data that needs to be evaluated quickly?",
       "answer": 1,
@@ -83,4 +84,5 @@ mock_router = fast.APIRouter()
 
 @mock_router.post('/questions')
 def generate_questions():
+    time.sleep(2)
     return MOCK_DATA

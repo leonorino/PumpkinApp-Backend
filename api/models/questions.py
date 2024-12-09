@@ -7,7 +7,7 @@ class QuestionTypes(str, Enum):
     """Перечисление возможных типов вопросов"""
     true_false = 'true_false'
     gap = 'gap'
-    multiple_choice = 'multiple_choice'
+    choice = 'choice'
 
     def get_name(self):
         return self.name

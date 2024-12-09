@@ -26,7 +26,7 @@ class MultipleChoiceAnswer(BaseModel):
     answer: int
     variants: List[str]
 
-MULTIPLE_CHOICE_PROMPT = 'Generate a question about the following video transcript that will require choosing only one variant from following ones.' \
+CHOICE_PROMPT = 'Generate a question about the following video transcript that will require choosing only one variant from following ones.' \
     ' Provide variants and index of the correct answer.'
 GAP_PROMPT = 'Take a really super-dooper small contextual part of the following video transcript and replace one interesting word in it with a gap, mark the spot with $.' \
     ' Provide the part with a gap and a missing word.'
@@ -35,7 +35,7 @@ TRUE_FALSE_PROMPT = 'Generate a true/false question about the following video tr
 PROMPTS = {
     QuestionTypes.true_false: (TRUE_FALSE_PROMPT, TrueFalseAnswer),
     QuestionTypes.gap: (GAP_PROMPT, GapAnswer),
-    QuestionTypes.multiple_choice: (MULTIPLE_CHOICE_PROMPT, MultipleChoiceAnswer),
+    QuestionTypes.choice: (CHOICE_PROMPT, MultipleChoiceAnswer),
 }
 
 client = instructor.from_openai(
@@ -48,8 +48,11 @@ client = instructor.from_openai(
 
 
 def generate(transcript, question_types):
+    question_count = sum(question_types.values())
+    max_chunk_size = len(transcript) / question_count
+
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
+        chunk_size=min(max_chunk_size, 1000),
         chunk_overlap=100,
         length_function=len,
         is_separator_regex=False,
@@ -63,7 +66,7 @@ def generate(transcript, question_types):
         current_chunks = set(chunks)
         results[question_type.get_name()] = []
         for _ in range(count):
-            text = choice(tuple(current_chunks)) # I know all the bullshit I do with those sets is a war crime, all right?
+            text = choice(tuple(current_chunks))
             user_prompt = f'{prompt} \n{text}'
             response = client.chat.completions.create(
                 model='qwen2.5',
