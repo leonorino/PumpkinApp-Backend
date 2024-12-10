@@ -77,7 +77,7 @@ MOCK_DATA = {
       "question": "Do special function units perform more complex operations like division and square root on NVIDIA GPUs?",
       "answer": True
     }
-  ]
+  ],
 }
 
 mock_router = fast.APIRouter()
@@ -86,3 +86,9 @@ mock_router = fast.APIRouter()
 def generate_questions():
     time.sleep(2)
     return MOCK_DATA
+
+@mock_router.get('/title')
+def get_title():
+    return {
+        'title': 'How do Computer GPUs work?',
+    }
