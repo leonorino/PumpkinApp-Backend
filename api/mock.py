@@ -47,7 +47,7 @@ MOCK_DATA = {
     },
     {
       "question": "How many Earths filled with people, each performing one calculation per second, would be needed to match the computational power of a single graphics card?",
-      "answer": 4400,
+      "answer": 3,
       "variants": [
         "44",
         "440",

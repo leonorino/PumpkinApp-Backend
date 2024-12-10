@@ -3,3 +3,6 @@ requests
 fastapi[standard]
 youtube-transcript-api
 ollama
+langchain
+instructor
+beautifulsoup4
